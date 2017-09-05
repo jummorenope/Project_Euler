@@ -2,68 +2,43 @@
 #include <cmath>
 #include <vector>
 
-int factorial(int n);
-void vec(std::vector <int> &a, int z);
-
 int main (void)
 {
-  std::vector <int> a;
-  std::vector <int> b;
+  std::vector <int> a{1};
   int s=0;
-  for(int ii=3;ii<std::pow(10,7); ii++)
+  for(int z=1; z<=100; z++)
     {
-      vec(a, ii);
+      s=0;
+      for(int kk=0; kk<a.size(); kk++)
+	{
+	  a[kk]=a[kk]*z;
+	}
+      
       for(int jj=0; jj<a.size(); jj++)
 	{
-	  s+=factorial(a[jj]);
+	  if(a[jj]>=10)
+	    {
+	      if(jj+1==a.size())
+		{
+		  a.resize(jj+2);
+		  a[jj+1]=(a[jj]-a[jj]%10)/10;
+		  a[jj]=a[jj]%10;
+		}
+	      else
+		{
+		  a[jj+1]+=(a[jj]-a[jj]%10)/10;
+		  a[jj]=a[jj]%10;
+		}
+	    }
 	}
-      if(ii==s)
+      
+      for(int ii=0; ii<a.size(); ii++)
 	{
-	  int h=b.size();
-	  b.resize(h+1);
-	  b[h]=s;
+	  std::cout<<a[a.size()-1-ii];
+	  s+=a[ii];
 	}
-      s=0;
-    }
-  for(int ii=0; ii<b.size(); ii++)
-    {
-      s+=b[ii];
+      std::cout<<std::endl;
     }
   std::cout<<s<<std::endl;
   return 0;
 }
-
-int factorial(int n)
-{
-  int fact=1;
-  if(n==0)
-    return 1;
-  
-  else
-    for(int ii=1; ii<=n; ii++)
-      {
-	  fact*=ii;
-      }
-  
-  return fact;   
-}
-
-void vec(std::vector <int> &a, int z)
-{
-  int p=1, jj=1;
-  while(z>=p)
-    {
-      p*=10;
-      jj+=1;
-    }
-  p=p/10;
-  jj-=1;
-  a.resize(jj);
-  for(int ii=0; ii<jj; ii++)
-    {
-      a[ii]=(z-z%p)/p;
-      z=z%p;
-      p=p/10;
-    }
-}
-
