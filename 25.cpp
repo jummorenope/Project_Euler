@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include "lib.h"
 
 void fibonacci(std::vector<short int> &a, std::vector<short int> &b, std::vector<short int> &c, int k);
 
